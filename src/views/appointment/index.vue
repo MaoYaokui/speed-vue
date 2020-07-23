@@ -1,6 +1,10 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
+      <el-input v-model="listQuery.product" placeholder="课程名称" style="width: 200px;" class="filter-item"
+                @keyup.enter.native="handleFilter"/>
+      <el-input v-model="listQuery.phone" placeholder="课程名称" style="width: 200px;" class="filter-item"
+                @keyup.enter.native="handleFilter"/>
       <el-button v-waves type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
@@ -108,6 +112,8 @@
         total: 0,
         listLoading: true,
         listQuery: {
+          product: null,
+          phone: null,
           page: 1,
           limit: 30
         },

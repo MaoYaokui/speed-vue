@@ -1,6 +1,12 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
+      <el-input v-model="listQuery.userName" placeholder="购买用户" style="width: 200px;" class="filter-item"
+                @keyup.enter.native="handleFilter"/>
+      <el-input v-model="listQuery.productName" placeholder="商品名称" style="width: 200px;" class="filter-item"
+                @keyup.enter.native="handleFilter"/>
+      <el-input v-model="listQuery.itemName" placeholder="商品规格" style="width: 200px;" class="filter-item"
+                @keyup.enter.native="handleFilter"/>
       <el-button v-waves type="primary" icon="el-icon-search" @click="handleFilter">
         Search
       </el-button>
@@ -77,6 +83,9 @@
         total: 0,
         listLoading: true,
         listQuery: {
+          userName: null,
+          productName: null,
+          itemName: null,
           page: 1,
           limit: 30
         }
@@ -101,9 +110,9 @@
           this.list = response.page.list.map(orders => {
             orders.nickName = ''
             get(orders.userId)
-                .then(response => {
-                  orders.nickName = response.user.nickName
-                })
+              .then(response => {
+                orders.nickName = response.user.nickName
+              })
             return orders
           })
           this.listLoading = false
